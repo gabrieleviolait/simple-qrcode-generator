@@ -116,6 +116,15 @@
         }
     </script>
 
-Di <a href="https://www.gabrieleviola.it">Gabriele Viola</a> 2025 Copyright - QR generato localmente nel browser. I dati non vengono salvati o trasmessi.
+Di <a href="https://www.gabrieleviola.it">Gabriele Viola</a> <span class="current-year"></span> Copyright - QR generato localmente nel browser. I dati non vengono salvati o trasmessi.
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".current-year").forEach(function(el) {
+            el.textContent = new Date().getFullYear();
+        });
+    });
+</script>
+
 </body>
 </html>
