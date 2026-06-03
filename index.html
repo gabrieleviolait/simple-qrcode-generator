@@ -58,18 +58,17 @@
                 return;
             }
 
-            const canvas = document.createElement("canvas");
-            container.appendChild(canvas);
+            if (typeof QRCode === "undefined") {
+                container.textContent = "Errore: libreria QR locale non caricata.";
+                console.error("QRCode library not loaded");
+                return;
+            }
 
-            QRCode.toCanvas(canvas, data, {
+            new QRCode(container, {
+                text: data,
                 width: 180,
-                margin: 2,
-                errorCorrectionLevel: "M"
-            }, function (error) {
-                if (error) {
-                    console.error(error);
-                    container.textContent = "Errore durante la generazione del QR Code.";
-                }
+                height: 180,
+                correctLevel: QRCode.CorrectLevel.M
             });
         }
     </script>
