@@ -11,8 +11,18 @@
             padding: 50px;
         }
         #qr-image-container {
-            margin-top: 20px;
-            min-height: 150px; /* Riserva spazio per il QR */
+            margin: 24px auto 0;
+            min-height: 190px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        #qr-image-container canvas,
+        #qr-image-container img {
+            display: block;
+            margin: 0 auto;
         }
         input[type="text"] {
             padding: 10px;
@@ -31,15 +41,48 @@
         button:hover {
             background-color: #0056b3;
         }
-    </style>
+    
+        .input-row {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 700px) {
+            body {
+                padding: 24px;
+            }
+
+            .input-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            input[type="text"] {
+                width: 100%;
+                max-width: none;
+                box-sizing: border-box;
+                margin-right: 0;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+
+      </style>
 </head>
 <body>
 
     <h1>Generatore di QR Code</h1>
     <p>Inserisci il testo o l'URL e premi "Genera QR Code".</p>
 
-    <input type="text" id="qr-data" placeholder="Inserisci qui il testo o l'URL">
-    <button onclick="generateQR()">Genera QR Code</button>
+    <div class="input-row">
+        <input type="text" id="qr-data" placeholder="Inserisci qui il testo o l'URL">
+        <button onclick="generateQR()">Genera QR Code</button>
+    </div>
 
     <div id="qr-image-container">
         </div>
