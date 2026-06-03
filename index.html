@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generatore di QR Code Semplice</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        #qr-image-container {
+            margin-top: 20px;
+            min-height: 150px; /* Riserva spazio per il QR */
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 80%;
+            max-width: 400px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Generatore di QR Code</h1>
+    <p>Inserisci il testo o l'URL e premi "Genera QR Code".</p>
+
+    <input type="text" id="qr-data" placeholder="Inserisci qui il testo o l'URL">
+    <button onclick="generateQR()">Genera QR Code</button>
+
+    <div id="qr-image-container">
+        </div>
+
+    <script src="vendor/qrcode.min.js"></script>
+
+    <script>
+        function generateQR() {
+            const data = document.getElementById('qr-data').value.trim();
+            const container = document.getElementById('qr-image-container');
+
+            container.innerHTML = "";
+
+            if (!data) {
+                container.textContent = "Per favore, inserisci un testo o un URL.";
+                return;
+            }
+
+            const canvas = document.createElement("canvas");
+            container.appendChild(canvas);
+
+            QRCode.toCanvas(canvas, data, {
+                width: 180,
+                margin: 2,
+                errorCorrectionLevel: "M"
+            }, function (error) {
+                if (error) {
+                    console.error(error);
+                    container.textContent = "Errore durante la generazione del QR Code.";
+                }
+            });
+        }
+    </script>
+
+Di <a href="https://www.gabrieleviola.it">Gabriele Viola</a> 2025 Copyright - QR generato localmente nel browser. I dati non vengono salvati o trasmessi.
+</body>
+</html>
